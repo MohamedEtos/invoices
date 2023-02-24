@@ -32,7 +32,8 @@ Route::group([ 'middleware'=>'auth'], function(){
     Route::resource('invoices','App\Http\Controllers\InvoicesController');
     Route::get('section/{id}','App\Http\Controllers\InvoicesController@getproducts');
     Route::get('invoicesdetails/{id}','App\Http\Controllers\InvoicesDetailsController@edit');
-    Route::get('viewfile/{invoices_number}/{file_name}','App\Http\Controllers\InvoicesDetailsController@openfile');
+    Route::get('viewfile/{invoices_number}/{file_name}','App\Http\Controllers\InvoicesAttachmentsController@openfile');
+    Route::get('downloadfile/{invoices_number}/{file_name}','App\Http\Controllers\InvoicesAttachmentsController@downloadfile');
     Route::resource('sections','App\Http\Controllers\SectionsController');
     Route::resource('products','App\Http\Controllers\ProductsController');
 

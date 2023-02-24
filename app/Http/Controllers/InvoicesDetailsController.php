@@ -91,15 +91,5 @@ class InvoicesDetailsController extends Controller
         //
     }
 
-    public function openfile($invoices_number,$file_name){
-        
-        // $files = Storage::disk('public_upload')->getDriver()->getAdapter()->applyPathPrefix($invoices_number . '/' . $file_name);
-        $files = Storage::disk('public_upload')->get($invoices_number . $file_name);
-
-        // return response()->file($files);
-
-        return $files;
-
-    }
 
 }
