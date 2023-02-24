@@ -91,7 +91,7 @@ class InvoicesController extends Controller
             ]);
 
             $imageName = $request->pic->getClientOriginalName();
-            $request->pic->move(storage_path('Attachments/'.$invoice_number),$imageName);
+            $request->pic->move(public_path('Attachments/'.$invoice_number),$imageName);
 
             return back()->with('success','تم اضافه الفاتورة بنجاح');
 

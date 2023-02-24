@@ -6,7 +6,8 @@ use App\Models\invoices;
 use App\Models\invoices_attachments;
 use App\Models\invoices_details;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
+use File;
 class InvoicesDetailsController extends Controller
 {
     /**
@@ -89,4 +90,16 @@ class InvoicesDetailsController extends Controller
     {
         //
     }
+
+    public function openfile($invoices_number,$file_name){
+        
+        // $files = Storage::disk('public_upload')->getDriver()->getAdapter()->applyPathPrefix($invoices_number . '/' . $file_name);
+        $files = Storage::disk('public_upload')->get($invoices_number . $file_name);
+
+        // return response()->file($files);
+
+        return $files;
+
+    }
+
 }

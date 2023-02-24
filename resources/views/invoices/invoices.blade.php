@@ -95,6 +95,7 @@
 												<td>{{$invoice->invoice_Date}}</td>
 												<td>{{$invoice->due_date}}</td>
 												<td>{{$invoice->productionToSectionsRealtions->section_name}}</td>
+												{{-- <td>{{$invoice->invoice_id}}</td> --}}
 												<td>
 													<a href="{{url('invoicesdetails')}}/{{$invoice->id}}">
 														{{$invoice->product}}

@@ -235,6 +235,7 @@
                                                                 <th scope="col">اسم الملف</th>
                                                                 <th scope="col">قام بالاضافة</th>
                                                                 <th scope="col">تاريخ الاضافة</th>
+                                                                <th scope="col">الصورة</th>
                                                                 <th scope="col">العمليات</th>
                                                             </tr>
                                                         </thead>
@@ -247,10 +248,11 @@
                                                                     <td>{{ $attachment->file_name }}</td>
                                                                     <td>{{ $attachment->Created_by }}</td>
                                                                     <td>{{ $attachment->created_at }}</td>
+                                                                    <td><img src="{{asset('Attachments/'.$attachment->invoice_number.'/'.$attachment->file_name)}}" style="width: 70px;" alt=""></td>
                                                                     <td colspan="2">
 
                                                                         <a class="btn btn-outline-success btn-sm"
-                                                                            href="{{ url('View_file') }}/{{ $invoices->invoice_number }}/{{ $attachment->file_name }}"
+                                                                            href="{{ url('viewfile') }}/{{ $invoices->invoice_number }}/{{ $attachment->file_name }}"
                                                                             role="button"><i class="fas fa-eye"></i>&nbsp;
                                                                             عرض</a>
 
