@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('product_name');
             $table->text('description');
-            $table->unsignedBigInteger('sections_id');
+            $table->bigInteger('sections_id')->unsigned();
             $table->foreign('sections_id')->references('id')->on('sections')->onDelete('cascade');
             $table->timestamps();
         });

@@ -95,12 +95,25 @@
 												<td>{{$invoice->invoice_Date}}</td>
 												<td>{{$invoice->due_date}}</td>
 												<td>{{$invoice->productionToSectionsRealtions->section_name}}</td>
-												<td>{{$invoice->product}}</td>
+												<td>
+													<a href="{{url('invoicesdetails')}}/{{$invoice->id}}">
+														{{$invoice->product}}
+													</a>
+													
+												</td>
 												<td>{{$invoice->discount}}</td>
 												<td>{{$invoice->rate_vat}}</td>
 												<td>{{$invoice->value_vat}}</td>
 												<td>{{$invoice->total}}</td>
-												<td>{{$invoice->status}}</td>
+												<td>
+												@if ($invoice->value_status == 1)
+													<span class="text-success">{{ $invoice->status }}</span>
+												@elseif($invoice->value_status == 2)
+													<span class="text-danger">{{ $invoice->status }}</span>
+												@else
+													<span class="text-warning">{{ $invoice->status }}</span>
+												@endif
+												</td>
 												<td>{{$invoice->note}}</td>
 											</tr>
 											@endforeach

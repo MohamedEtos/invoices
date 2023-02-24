@@ -22,15 +22,16 @@ return new class extends Migration
             $table->bigInteger('section')->unsigned();
             $table->foreign('section')->references('id')->on('sections')->onDelete('cascade');
             $table->decimal('discount');
-            $table->decimal('rate_vat');
-            $table->decimal('value_vat',);
-            $table->decimal('total',);
+            $table->string('rate_vat');
+            $table->string('value_vat');
+            $table->decimal('total');
             $table->string('status',50);
             $table->string('value_status');
             $table->text('note')->nullable();
             $table->string('user');
             $table->softDeletes();
             $table->timestamps();
+            
         });
     }
 

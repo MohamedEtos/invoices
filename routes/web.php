@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\User;
+use GuzzleHttp\Promise\Create;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,10 +31,23 @@ Route::group([ 'middleware'=>'auth'], function(){
 
     Route::resource('invoices','App\Http\Controllers\InvoicesController');
     Route::get('section/{id}','App\Http\Controllers\InvoicesController@getproducts');
+    Route::get('invoicesdetails/{id}','App\Http\Controllers\InvoicesDetailsController@edit');
     Route::resource('sections','App\Http\Controllers\SectionsController');
     Route::resource('products','App\Http\Controllers\ProductsController');
 
 });
 
+
+Route::get('addadmin',function(){
+
+    User::create([
+        'name'=>'محمد محروس',
+        'email'=>'admin@admin.com',
+        'password'=>Hash::make('password'),
+    ]);
+
+    return redirect('/');
+
+});
 
 Route::get('/{page}', 'App\Http\Controllers\AdminController@index');
