@@ -6,6 +6,15 @@
     <link href="{{ URL::asset('assets/plugins/inputtags/inputtags.css') }}" rel="stylesheet">
     <!--- Custom-scroll -->
     <link href="{{ URL::asset('assets/plugins/custom-scroll/jquery.mCustomScrollbar.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
+    <!---Internal Fileupload css-->
+    <link href="{{ URL::asset('assets/plugins/fileuploads/css/fileupload.css') }}" rel="stylesheet" type="text/css" />
+    <!---Internal Fancy uploader css-->
+    <link href="{{ URL::asset('assets/plugins/fancyuploder/fancy_fileupload.css') }}" rel="stylesheet" />
+    <!--Internal Sumoselect css-->
+    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/sumoselect/sumoselect-rtl.css') }}">
+    <!--Internal  TelephoneInput css-->
+    <link rel="stylesheet" href="{{ URL::asset('assets/plugins/telephoneinput/telephoneinput-rtl.css') }}">
 @endsection
 @section('title')
     تفاصيل فاتورة
@@ -26,39 +35,6 @@
 @section('content')
 
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-
-    @if (session()->has('Add'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('Add') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-
-
-    @if (session()->has('delete'))
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('delete') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
-
-
-
     <!-- row opened -->
     <div class="row row-sm">
 
@@ -66,6 +42,15 @@
             <!-- div -->
             <div class="card mg-b-20" id="tabs-style2">
                 <div class="card-body">
+                    @if(Session::has('success'))
+                    <span id="hideMeAfter5Seconds" class=" mr-2 text-success ">{{Session::get('success')}}</span>
+                    @endif
+                    @if(Session::has('errors'))
+                    <span id="hideMeAfter5Seconds" class=" mr-2 text-danger ">{{Session::get('errors')}}</span>
+                    @endif
+                    @if(Session::has('delete'))
+                    <span id="hideMeAfter5Seconds" class=" mr-2 text-danger ">{{Session::get('delete')}}</span>
+                    @endif
                     <div class="text-wrap">
                         <div class="example">
                             <div class="panel panel-primary tabs-style-2">
@@ -202,28 +187,27 @@
                                         <div class="tab-pane" id="tab6">
                                             <!--المرفقات-->
                                             <div class="card card-statistics">
-                                                @can('اضافة مرفق')
+
+                                                
                                                     <div class="card-body">
                                                         <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
                                                         <h5 class="card-title">اضافة مرفقات</h5>
-                                                        <form method="post" action="{{ url('/InvoiceAttachments') }}"
+                                                        <form method="post" action="{{ url('addMoreAttachments') }}"
                                                             enctype="multipart/form-data">
                                                             {{ csrf_field() }}
                                                             <div class="custom-file">
-                                                                <input type="file" class="custom-file-input" id="customFile"
-                                                                    name="file_name" required>
-                                                                <input type="hidden" id="customFile" name="invoice_number"
-                                                                    value="{{ $invoices->invoice_number }}">
-                                                                <input type="hidden" id="invoice_id" name="invoice_id"
-                                                                    value="{{ $invoices->id }}">
-                                                                <label class="custom-file-label" for="customFile">حدد
-                                                                    المرفق</label>
-                                                            </div><br><br>
+                                                                <div class="col-sm-12 col-md-3 mt-2">
+                                                                    <input type="hidden" name="invoice_number" value="{{$invoices->invoice_number}}">
+                                                                    <input type="hidden" name="invoice_id" value="{{$invoices->id}}">
+                                                                    <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
+                                                                        data-height="107" />
+                                                                </div>
+                                                            </div>
+                                                            <br><br>
                                                             <button type="submit" class="btn btn-primary btn-sm "
                                                                 name="uploadedFile">تاكيد</button>
                                                         </form>
                                                     </div>
-                                                @endcan
                                                 <br>
 
                                                 <div class="table-responsive mt-15">
@@ -262,14 +246,12 @@
                                                                                 class="fas fa-download"></i>&nbsp;
                                                                             تحميل</a>
 
-                                                                        @can('حذف المرفق')
                                                                             <button class="btn btn-outline-danger btn-sm"
                                                                                 data-toggle="modal"
                                                                                 data-file_name="{{ $attachment->file_name }}"
                                                                                 data-invoice_number="{{ $attachment->invoice_number }}"
                                                                                 data-id_file="{{ $attachment->id }}"
                                                                                 data-target="#delete_file">حذف</button>
-                                                                        @endcan
 
                                                                     </td>
                                                                 </tr>
@@ -306,7 +288,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="" method="post">
+                <form action="{{url('delete_file')}}" method="post">
 
                     {{ csrf_field() }}
                     <div class="modal-body">
@@ -336,7 +318,6 @@
     <!--Internal  Datepicker js -->
     <script src="{{ URL::asset('assets/plugins/jquery-ui/ui/widgets/datepicker.js') }}"></script>
     <!-- Internal Select2 js-->
-    <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
     <!-- Internal Jquery.mCustomScrollbar js-->
     <script src="{{ URL::asset('assets/plugins/custom-scroll/jquery.mCustomScrollbar.concat.min.js') }}"></script>
     <!-- Internal Input tags js-->
@@ -349,6 +330,12 @@
     <script src="{{ URL::asset('assets/plugins/clipboard/clipboard.js') }}"></script>
     <!-- Internal Prism js-->
     <script src="{{ URL::asset('assets/plugins/prism/prism.js') }}"></script>
+
+        <!-- Internal Select2 js-->
+        <script src="{{ URL::asset('assets/plugins/select2/js/select2.min.js') }}"></script>
+        <!--Internal Fileuploads js-->
+        <script src="{{ URL::asset('assets/plugins/fileuploads/js/fileupload.js') }}"></script>
+        <script src="{{ URL::asset('assets/plugins/fileuploads/js/file-upload.js') }}"></script>
 
     <script>
         $('#delete_file').on('show.bs.modal', function(event) {

@@ -34,6 +34,8 @@ Route::group([ 'middleware'=>'auth'], function(){
     Route::get('invoicesdetails/{id}','App\Http\Controllers\InvoicesDetailsController@edit');
     Route::get('viewfile/{invoices_number}/{file_name}','App\Http\Controllers\InvoicesAttachmentsController@openfile');
     Route::get('downloadfile/{invoices_number}/{file_name}','App\Http\Controllers\InvoicesAttachmentsController@downloadfile');
+    Route::post('delete_file','App\Http\Controllers\InvoicesAttachmentsController@delete_file');
+    Route::post('addMoreAttachments','App\Http\Controllers\InvoicesAttachmentsController@addMoreAttachments');
     Route::resource('sections','App\Http\Controllers\SectionsController');
     Route::resource('products','App\Http\Controllers\ProductsController');
 
