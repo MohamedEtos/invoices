@@ -62,9 +62,10 @@
 								@if(Session::has('fai_edit_sections'))
 								<span id="hideMeAfter5Seconds" class=" mr-2 text-danger">{{Session::get('fai_edit_sections')}}</span>
 								@endif
-
+								<script> test(); </script>
+								
 								@if(Session::has('success')) 
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-success">{{Session::get('success')}}</span>
+								<span id="hideMeAfter5Seconds"  class=" mr-2 text-success">{{Session::get('success')}}</span>
 								@endif
 							</div>
 							<div class="card-body">
@@ -76,7 +77,7 @@
 										
 										<thead>
 											<tr>
-												<th class="border-bottom-0">م</th>
+												<th class="border-bottom-0" >م</th>
 												<th class="border-bottom-0">اسم المنتج</th>
 												<th class="border-bottom-0">اسم القسم</th>
 												<th class="border-bottom-0">ملاحظات</th>
@@ -146,7 +147,7 @@
 														</div>
 												</div>
 												<div class="modal-footer">
-													<button class="btn ripple btn-success" type="submit" onclick="not7()">حفظ</button>
+													<button class="btn ripple btn-success" type="submit" >حفظ</button>
 													<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">اغلاق</button>
 												</div>
 											</div>
@@ -233,7 +234,6 @@
 										</div>
 									</div>
 								</div>
-
 								{{-- end delete --}}
 				</div>
 				<!-- /row -->
@@ -298,7 +298,10 @@
 
             modal.find('.modal-body #pro_id').val(pro_id);
             modal.find('.modal-body #product_name').val(product_name);
-        })
+        });
+
+		function test(){
+		};
 </script>
 
 @endsection
