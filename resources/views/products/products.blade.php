@@ -10,6 +10,12 @@
 <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+<!--Internal  Font Awesome -->
+<link href="{{URL::asset('assets/plugins/fontawesome-free/css/all.min.css')}}" rel="stylesheet">
+<!--Internal   Notify -->
+<link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
+<!--Internal  treeview -->
+<link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('page-header')
@@ -57,7 +63,7 @@
 								<span id="hideMeAfter5Seconds" class=" mr-2 text-danger">{{Session::get('fai_edit_sections')}}</span>
 								@endif
 
-								@if(Session::has('success'))
+								@if(Session::has('success')) 
 								<span id="hideMeAfter5Seconds" class=" mr-2 text-success">{{Session::get('success')}}</span>
 								@endif
 							</div>
@@ -140,7 +146,7 @@
 														</div>
 												</div>
 												<div class="modal-footer">
-													<button class="btn ripple btn-success" type="submit">حفظ</button>
+													<button class="btn ripple btn-success" type="submit" onclick="not7()">حفظ</button>
 													<button class="btn ripple btn-secondary" data-dismiss="modal" type="button">اغلاق</button>
 												</div>
 											</div>
@@ -238,6 +244,10 @@
 @endsection
 @section('js')
 <!-- Internal Data tables -->
+<!-- Internal Treeview js -->
+<script src="{{URL::asset('assets/plugins/treeview/treeview.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.dataTables.min.js')}}"></script>
 <script src="{{URL::asset('assets/plugins/datatable/js/dataTables.responsive.min.js')}}"></script>
@@ -292,4 +302,7 @@
 </script>
 
 @endsection
+
+
+
 

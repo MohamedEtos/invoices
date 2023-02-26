@@ -6,6 +6,7 @@ use App\Models\invoices_attachments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class InvoicesAttachmentsController extends Controller
 {
@@ -25,10 +26,10 @@ class InvoicesAttachmentsController extends Controller
 
 
     public function delete_file(Request $request){
-return $request;
+        // return $request;
         invoices_attachments::where('id',$request->id_file)->delete();
-
-        // return redirect()->back()->with('delete','تم حذف الملف');
+        File::delete(public_path('Attachments/'.$request->invoice_number . '/' . $request->file_name));
+        return redirect()->back()->with('delete','تم حذف الملف');
 
     }
 

@@ -190,8 +190,7 @@
 
                                                 
                                                     <div class="card-body">
-                                                        <p class="text-danger">* صيغة المرفق pdf, jpeg ,.jpg , png </p>
-                                                        <h5 class="card-title">اضافة مرفقات</h5>
+                                                        <h5 class="card-title h6">اضافة مرفقات</h5>
                                                         <form method="post" action="{{ url('addMoreAttachments') }}"
                                                             enctype="multipart/form-data">
                                                             {{ csrf_field() }}
@@ -200,10 +199,10 @@
                                                                     <input type="hidden" name="invoice_number" value="{{$invoices->invoice_number}}">
                                                                     <input type="hidden" name="invoice_id" value="{{$invoices->id}}">
                                                                     <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
-                                                                        data-height="107" />
+                                                                        data-height="80" />
                                                                 </div>
                                                             </div>
-                                                            <br><br>
+                                                            <br>
                                                             <button type="submit" class="btn btn-primary btn-sm "
                                                                 name="uploadedFile">تاكيد</button>
                                                         </form>
@@ -296,7 +295,7 @@
                         <h6 style="color:red"> هل انت متاكد من عملية حذف المرفق ؟</h6>
                         </p>
 
-                        <input type="hidden" name="id_file" id="id_file" value="">
+                        <input type="hidden" name="id_file" id="id_file" value="{{$invoices->id}}">
                         <input type="hidden" name="file_name" id="file_name" value="">
                         <input type="hidden" name="invoice_number" id="invoice_number" value="">
 

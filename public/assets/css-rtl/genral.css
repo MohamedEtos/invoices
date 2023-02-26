@@ -1,4 +1,4 @@
-/* #hideMeAfter5Seconds {
+ #hideMeAfter5Seconds {
     animation: hideAnimation 0s ease-in 5s;
     animation-fill-mode: forwards;
   }
@@ -9,43 +9,5 @@
       width: 0;
       height: 0;
     }
-  } */
+  } 
 
-
-
-  @-webkit-keyframes slidein {
-    0% { opacity: 0; }
-    80% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-@-moz-keyframes slidein {
-    0% { opacity: 0; }
-    80% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-@-o-keyframes slidein {
-    0% { opacity: 0; }
-    80% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-@keyframes slidein {
-    0% { opacity: 0; }
-    80% { opacity: 0; }
-    100% { opacity: 1; }
-}
-
-#hideMeAfter5Seconds {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    top: 150px;
-    right: 150px;
-    background-color: black;
-    -webkit-animation: slidein 5s ease 1 normal;
-       -moz-animation: slidein 5s ease 1 normal;
-         -o-animation: slidein 5s ease 1 normal;
-            animation: slidein 5s ease 1 normal;
-}
