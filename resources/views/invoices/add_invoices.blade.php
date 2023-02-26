@@ -29,14 +29,9 @@
 @endsection
 @section('content')
 
-    @if (session()->has('success'))
-        <div id="hideMeAfter5Seconds" class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>{{ session()->get('success') }}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    @endif
+@if(Session::has('success')) 
+<span id="hideMeAfter5Seconds" class=" mr-2 text-success">{{Session::get('success')}}</span>
+@endif
 
 
     <!-- row -->

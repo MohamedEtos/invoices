@@ -79,6 +79,7 @@
 												<th class="border-bottom-0">الاجمالي</th>
 												<th class="border-bottom-0">الحاله</th>
 												<th class="border-bottom-0">ملاحظات</th>
+												<th class="border-bottom-0">العمليات</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -116,7 +117,18 @@
 												@endif
 												</td>
 												<td>{{$invoice->note}}</td>
+												<td>
+													<div class="dropdown">
+														<button aria-expanded="false" aria-haspopup="true" class="btn btn-sm ripple btn-primary"
+														data-toggle="dropdown" id="dropdownMenuButton" type="button">العمليات<i class="fas fa-caret-down ml-1"></i></button>
+														<div  class="dropdown-menu tx-13">
+															<a class="dropdown-item" href="{{url('invoicesdetails')}}/{{$invoice->id}}">تفاصيل اللفاتورة</a>
+															<a class="dropdown-item" href="{{url('edit_invoices')}}/{{$invoice->id}}">تعديل الفاتورة</a>
+														</div>
+													</div>
+												</td>
 											</tr>
+
 											@endforeach
 										</tbody>
 									</table>

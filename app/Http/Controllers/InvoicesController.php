@@ -53,6 +53,8 @@ class InvoicesController extends Controller
             'product'=>$request->product,
             'section'=>$request->Section,
             'discount'=>$request->Discount,
+            'Amount_collection'=>$request->Amount_collection,
+            'Amount_Commission'=>$request->Amount_Commission,
             'rate_vat'=>$request->Rate_VAT,
             'value_vat'=>$request->Value_VAT,
             'total'=>$request->Total,
@@ -119,9 +121,11 @@ class InvoicesController extends Controller
      * @param  \App\Models\invoices  $invoices
      * @return \Illuminate\Http\Response
      */
-    public function edit(invoices $invoices)
+    public function edit($id)
     {
-        //
+        $invoices = invoices::where('id', $id)->first();
+        $sections = sections::all();
+        return view('invoices.edit_invoices', compact('sections', 'invoices'));
     }
 
     /**
@@ -133,7 +137,39 @@ class InvoicesController extends Controller
      */
     public function update(Request $request, invoices $invoices)
     {
-        //
+        invoices::where('id',$request->invoice_id)->update([
+            'invoice_number'=>$request->invoice_number,
+            'invoice_Date'=>$request->invoice_Date,
+            'due_date'=>$request->due_date,
+            'product'=>$request->product,
+            'section'=>$request->section,
+            'discount'=>$request->discount,
+            'Amount_collection'=>$request->Amount_collection,
+            'Amount_Commission'=>$request->Amount_Commission,
+            'rate_vat'=>$request->rate_vat,
+            'value_vat'=>$request->value_vat,
+            'total'=>$request->total,
+            'status'=>'لم يتم الدفع',
+            'value_status'=>2,
+            'note'=>$request->note,
+            'user'=>Auth::user()->name,
+        ]);
+
+        $invoices_id = invoices::latest()->first()->id;
+
+        invoices_details::where('id',$request->invoice_id)->update([
+            'id_invoice'=>$invoices_id,
+            'invoice_number'=>$request->invoice_number,
+            'product'=>$request->product,
+            'section'=>$request->section,
+            'status'=>'لم يتم الدفع',
+            'value_Status'=>2,
+            'note'=>$request->note,
+            'user'=>Auth::user()->name,
+        ]);
+
+        return redirect()->back()->with('success','تم تعديل الفاتورة');
+
     }
 
     /**

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->bigInteger('section')->unsigned();
             $table->foreign('section')->references('id')->on('sections')->onDelete('cascade');
             $table->decimal('discount');
+            $table->decimal('Amount_collection',8,2)->nullable();
+            $table->decimal('Amount_Commission',8,2)->nullable();
             $table->string('rate_vat');
             $table->string('value_vat');
             $table->decimal('total');
