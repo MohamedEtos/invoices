@@ -30,6 +30,8 @@ Route::group([ 'middleware'=>'auth'], function(){
     Route::get('/home', 'App\Http\Controllers\HomeController@index');
 
     Route::resource('invoices','App\Http\Controllers\InvoicesController');
+    Route::resource('sections','App\Http\Controllers\SectionsController');
+    Route::resource('products','App\Http\Controllers\ProductsController');
     Route::get('section/{id}','App\Http\Controllers\InvoicesController@getproducts');
     Route::get('invoicesdetails/{id}','App\Http\Controllers\InvoicesDetailsController@edit');
     Route::get('edit_invoices/{id}','App\Http\Controllers\InvoicesController@edit');
@@ -37,8 +39,8 @@ Route::group([ 'middleware'=>'auth'], function(){
     Route::get('downloadfile/{invoices_number}/{file_name}','App\Http\Controllers\InvoicesAttachmentsController@downloadfile');
     Route::post('delete_file','App\Http\Controllers\InvoicesAttachmentsController@delete_file');
     Route::post('addMoreAttachments','App\Http\Controllers\InvoicesAttachmentsController@addMoreAttachments');
-    Route::resource('sections','App\Http\Controllers\SectionsController');
-    Route::resource('products','App\Http\Controllers\ProductsController');
+    Route::post('invoicesDeleted','App\Http\Controllers\InvoicesController@destroy');
+
 
 });
 

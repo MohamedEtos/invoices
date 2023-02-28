@@ -178,9 +178,9 @@ class InvoicesController extends Controller
      * @param  \App\Models\invoices  $invoices
      * @return \Illuminate\Http\Response
      */
-    public function destroy(invoices $invoices)
+    public function destroy(Request $request)
     {
-        //
+        return $request;
     }
 
 

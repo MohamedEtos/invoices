@@ -101,7 +101,7 @@
 													<a href="{{url('invoicesdetails')}}/{{$invoice->id}}">
 														{{$invoice->product}}
 													</a>
-													
+
 												</td>
 												<td>{{$invoice->discount}}</td>
 												<td>{{$invoice->rate_vat}}</td>
@@ -123,7 +123,13 @@
 														data-toggle="dropdown" id="dropdownMenuButton" type="button">العمليات<i class="fas fa-caret-down ml-1"></i></button>
 														<div  class="dropdown-menu tx-13">
 															<a class="dropdown-item" href="{{url('invoicesdetails')}}/{{$invoice->id}}">تفاصيل اللفاتورة</a>
-															<a class="dropdown-item" href="{{url('edit_invoices')}}/{{$invoice->id}}">تعديل الفاتورة</a>
+															<a class="dropdown-item text-info" href="{{url('edit_invoices')}}/{{$invoice->id}}">تعديل الفاتورة</a>
+															{{-- <a class="dropdown-item" href="{{Route('destroy')}}/{{$invoice->id}}">حذف الفاتورة</a> --}}
+                                                            <button class="dropdown-item text-danger"
+                                                            data-toggle="modal"
+                                                            data-id_inv="{{ $invoice->id }}"
+                                                            data-target="#delete_file"> حذف الفاتورة
+                                                        </button>
 														</div>
 													</div>
 												</td>
@@ -143,6 +149,42 @@
 			<!-- Container closed -->
 		</div>
 		<!-- main-content closed -->
+
+        {{-- delete modal --}}
+
+        <div class="modal fade" id="delete_file" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">حذف المرفق</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{url('invoicesDeleted')}}" method="post">
+
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <p class="text-center">
+                        <h6 style="color:red"> هل انت متاكد من عملية حذف الفاتورة ؟</h6>
+                        </p>
+
+                        <input type="text" name="id_inv" id="id_inv" value="">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">الغاء</button>
+                        <button type="submit" class="btn btn-danger">تاكيد</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+        {{-- delete modal --}}
+
 @endsection
 @section('js')
 <!-- Internal Data tables -->
@@ -165,3 +207,13 @@
 <!--Internal  Datatable js -->
 <script src="{{URL::asset('assets/js/table-data.js')}}"></script>
 @endsection
+
+
+<script>
+    $('#delete_file').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var id_inv = button.data('id_inv')
+        var modal = $(this)
+        modal.find('.modal-body #id_inv').val(id_inv);
+    })
+</script>
