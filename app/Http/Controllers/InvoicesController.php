@@ -180,7 +180,8 @@ class InvoicesController extends Controller
      */
     public function destroy(Request $request)
     {
-        return $request;
+        invoices::where('id',$request->id_inv)->delete();
+        return redirect()->back()->with('success','تم حذف الفاتورة');
     }
 
 

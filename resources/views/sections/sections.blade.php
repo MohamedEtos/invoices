@@ -10,6 +10,9 @@
 <link href="{{URL::asset('assets/plugins/datatable/css/jquery.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/datatable/css/responsive.dataTables.min.css')}}" rel="stylesheet">
 <link href="{{URL::asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+
+<!--Internal   Notify -->
+<link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
 @endsection
 
 @section('page-header')
@@ -39,20 +42,64 @@
 							<div class="col-sm-8 col-md-6 col-xl-4 mg-t-20">
 								<a class="modal-effect btn btn-outline-primary " data-effect="effect-rotate-left" data-toggle="modal" href="#modaldemo8">اضافه اقسام</a>
 								@error('section_name')
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-danger"> {{$message}}  <i class="icon icon ion-ios-close-circle-outline tx-30 tx-danger lh-1 mg-t-20 "></i></span>
+                                <input id="section_name" type="hidden" value="{{$message}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#section_name').val(),
+                                           type: "error"
+                                       });
+                                   }
+                                   </script>
 								@enderror
+
 								@error('description')
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-danger"> {{$message}}  <i class="icon icon ion-ios-close-circle-outline tx-30 tx-danger lh-1 mg-t-20 "></i></span>
+                                <input id="description" type="hidden" value="{{$message}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#description').val(),
+                                           type: "error"
+                                       });
+                                   }
+                                   </script>
 								@enderror
+
 								@if(Session::has('delete'))
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-success">{{Session::get('delete')}}</span>
+                                <input id="delete" type="hidden" value="{{Session::get('delete')}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#delete').val(),
+                                           type: "error"
+                                       });
+                                   }
+                                   </script>
 								@endif
+
+
 								@if(Session::has('delete_faild'))
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-danger">{{Session::get('delete_faild')}}</span>
+                                <input id="delete_faild" type="hidden" value="{{Session::get('delete_faild')}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#delete_faild').val(),
+                                           type: "error"
+                                       });
+                                   }
+                                   </script>
 								@endif
 
 								@if(Session::has('success'))
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-success">{{Session::get('success')}}</span>
+                                <input id="success" type="hidden" value="{{Session::get('success')}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#success').val(),
+                                           type: "success"
+                                       });
+                                   }
+                                   </script>
 								@endif
 							</div>
 							<div class="card-body">
@@ -61,7 +108,7 @@
 
 
 									<table id="example1" class="table key-buttons text-md-nowrap table_style "data-page-length="25">
-										
+
 										<thead>
 											<tr>
 												<th class="border-bottom-0">م</th>
@@ -79,7 +126,7 @@
 												<td>{{$i}}</td>
 												<td>{{$data->section_name}}</td>
 												<td>{{$data->description}}</td>
-												
+
 												<td>
                                                     <a class="modal-effect btn btn-sm btn-info" data-effect="effect-scale"
                                                        data-id="{{ $data->id }}" data-section_name="{{ $data->section_name }}"
@@ -90,10 +137,10 @@
                                                        data-id="{{ $data->id }}" data-section_name="{{ $data->section_name }}" data-toggle="modal"
                                                        href="#modaldemo9" title="حذف"><i class="las la-trash"></i></a>
                                             	</td>
-												
+
 											</tr>
 											@endforeach
-											
+
 										</tbody>
 									</table>
 
@@ -145,7 +192,7 @@
 										   </button>
 									   </div>
 									   <div class="modal-body">
-   
+
 										   <form action="sections/update" method="post" autocomplete="off">
 											   {{method_field('patch')}}
 											   {{csrf_field()}}
@@ -231,6 +278,10 @@
 <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 <!-- Internal Modal js-->
 <script src="{{URL::asset('assets/js/modal.js')}}"></script>
+
+
+<script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 
 <script>
 	$('#exampleModal2').on('show.bs.modal', function(event) {

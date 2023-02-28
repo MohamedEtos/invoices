@@ -16,6 +16,9 @@
 <link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
 <!--Internal  treeview -->
 <link href="{{URL::asset('assets/plugins/treeview/treeview.css')}}" rel="stylesheet" type="text/css" />
+
+<!--Internal   Notify -->
+<link href="{{URL::asset('assets/plugins/notify/css/notifIt.css')}}" rel="stylesheet"/>
 @endsection
 
 @section('page-header')
@@ -44,28 +47,88 @@
 
 							<div class="col-12 mg-t-20">
 								<a class="modal-effect btn btn-outline-primary col-sm-12 col-md-6 col-lg-2" data-effect="effect-rotate-left" data-toggle="modal" href="#modaldemo8">اضافة منتج</a>
+                                
 								@error('products_name')
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-danger"> {{$message}}  <i class="icon icon ion-ios-close-circle-outline tx-30 tx-danger lh-1 mg-t-20 "></i></span>
+                                <input id="products_name" type="hidden" value="{{$message}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#products_name').val(),
+                                           type: "error"
+                                       });
+                                   }
+                                   </script>
 								@enderror
+
 								@error('section_name')
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-danger"> {{$message}}  <i class="icon icon ion-ios-close-circle-outline tx-30 tx-danger lh-1 mg-t-20 "></i></span>
+                                <input id="section_name" type="hidden" value="{{$message}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#section_name').val(),
+                                           type: "error"
+                                       });
+                                   }
+                                   </script>
 								@enderror
+
 								@error('description')
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-danger"> {{$message}}  <i class="icon icon ion-ios-close-circle-outline tx-30 tx-danger lh-1 mg-t-20 "></i></span>
+                                <input id="description" type="hidden" value="{{$message}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#description').val(),
+                                           type: "error"
+                                       });
+                                   }
+                                   </script>
 								@enderror
+
 								@if(Session::has('delete'))
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-success">{{Session::get('delete')}}</span>
+                                <input id="delete" type="hidden" value="{{Session::get('delete')}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#delete').val(),
+                                           type: "error"
+                                       });
+                                   }
+                                   </script>
 								@endif
+
 								@if(Session::has('delete_faild'))
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-danger">{{Session::get('delete_faild')}}</span>
+                                <input id="delete_faild" type="hidden" value="{{Session::get('delete_faild')}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#delete_faild').val(),
+                                           type: "error"
+                                       });
+                                   }
+                                   </script>
 								@endif
 								@if(Session::has('fai_edit_sections'))
-								<span id="hideMeAfter5Seconds" class=" mr-2 text-danger">{{Session::get('fai_edit_sections')}}</span>
+                                <input id="fai_edit_sections" type="hidden" value="{{Session::get('fai_edit_sections')}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#fai_edit_sections').val(),
+                                           type: "error"
+                                       });
+                                   }
+                                   </script>
 								@endif
-								<script> test(); </script>
-								
-								@if(Session::has('success')) 
-								<span id="hideMeAfter5Seconds"  class=" mr-2 text-success">{{Session::get('success')}}</span>
+
+								@if(Session::has('success'))
+                                <input id="nofic" type="hidden" value="{{Session::get('success')}}">
+                                <script>
+                                    window.onload = function not7() {
+                                      notif({
+                                           msg: $('#nofic').val(),
+                                           type: "success"
+                                       });
+                                   }
+                                   </script>
 								@endif
 							</div>
 							<div class="card-body">
@@ -74,7 +137,7 @@
 
 
 									<table id="example1" class="table key-buttons text-md-nowrap table_style "data-page-length="25">
-										
+
 										<thead>
 											<tr>
 												<th class="border-bottom-0" >م</th>
@@ -94,22 +157,22 @@
 												<td>{{$data->product_name}}</td>
 												<td>{{$data->productionToSectionsRealtions->section_name }}</td>
 												<td>{{$data->description}}</td>
-												
+
 												<td>
 													<button class="btn btn-outline-success btn-sm"
 														data-name="{{ $data->product_name }}" data-pro_id="{{ $data->id }}"
 														data-section_name="{{ $data->productionToSectionsRealtions->section_name }}"
 														data-description="{{ $data->description }}" data-toggle="modal"
 														data-target="#edit_Product">تعديل</button>
-		
+
 													<button class="btn btn-outline-danger btn-sm " data-pro_id="{{ $data->id }}"
 														data-product_name="{{ $data->product_name }}" data-toggle="modal"
 														data-target="#modaldemo9">حذف</button>
 												</td>
-												
+
 											</tr>
 											@endforeach
-											
+
 										</tbody>
 									</table>
 
@@ -138,7 +201,7 @@
 															<option value="" selected disabled> --حدد القسم--</option>
 															 @foreach ($sections as $section)
 																<option value="{{ $section->id }}">{{ $section->section_name }}</option>
-															 @endforeach 
+															 @endforeach
 														</select>
 
 														<div class="mb-3">
@@ -173,28 +236,28 @@
 											{{ method_field('patch') }}
 											{{ csrf_field() }}
 											<div class="modal-body">
-					
+
 												<div class="form-group">
 													<label for="title">اسم المنتج :</label>
-					
+
 													<input type="hidden" class="form-control" name="pro_id" id="pro_id" value="">
-					
+
 													<input type="text" class="form-control" name="product_name" id="product_name">
 												</div>
-					
+
 												<label class="my-1 mr-2" for="inlineFormCustomSelectPref">القسم</label>
 												<select name="section_name" id="section_name" class="custom-select my-1 mr-sm-2" required>
 													@foreach ($sections as $section)
 														<option>{{ $section->section_name }}</option>
 													@endforeach
 												</select>
-					
+
 												<div class="form-group">
 													<label for="des">ملاحظات :</label>
 													<textarea name="description" cols="20" rows="5" id='description'
 														class="form-control"></textarea>
 												</div>
-					
+
 											</div>
 											<div class="modal-footer">
 												<button type="submit" class="btn btn-primary">تعديل البيانات</button>
@@ -273,6 +336,9 @@
 <script src="{{URL::asset('assets/plugins/select2/js/select2.min.js')}}"></script>
 <!-- Internal Modal js-->
 <script src="{{URL::asset('assets/js/modal.js')}}"></script>
+
+<script src="{{URL::asset('assets/plugins/notify/js/notifIt.js')}}"></script>
+<script src="{{URL::asset('assets/plugins/notify/js/notifit-custom.js')}}"></script>
 
 <script>
         $('#edit_Product').on('show.bs.modal', function(event) {
