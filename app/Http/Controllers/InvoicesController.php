@@ -190,4 +190,29 @@ class InvoicesController extends Controller
         return json_encode($products);
 
     }
+    public function updatePayments(Request $request){
+
+
+        invoices_details::where('id',$request->id_inv)->update([
+            'value_Status' => $request->invoices_status,
+            'note' => $request->note_payments,
+        ]);
+
+
+
+        if( invoices_details::where('id',$request->id_inv)->first()->value_Status == 0){
+            invoices_details::where('id',$request->id_inv)->update([
+                'status'=>'تم الدفع'
+            ]);
+        }
+
+        if( invoices_details::where('id',$request->id_inv)->first()->value_Status == 1){
+            invoices_details::where('id',$request->id_inv)->update([
+                'status'=>'تم الدفع جزئياً'
+            ]);
+        }
+
+        return redirect()->back()->with('success','تم تعديل حاله الدفع');
+
+    }
 }

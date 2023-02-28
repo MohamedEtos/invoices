@@ -89,9 +89,9 @@
                                                             <th scope="row">المنتج</th>
                                                             <td>{{ $invoices->product }}</td>
                                                             <th scope="row">مبلغ التحصيل</th>
-                                                            <td>{{ $invoices->amount_collection }}</td>
+                                                            <td>{{ $invoices->Amount_collection }}</td>
                                                             <th scope="row">مبلغ العمولة</th>
-                                                            <td>{{ $invoices->amount_Commission }}</td>
+                                                            <td>{{ $invoices->Amount_Commission }}</td>
                                                             <th scope="row">الخصم</th>
                                                             <td>{{ $invoices->discount }}</td>
                                                         </tr>
@@ -99,9 +99,9 @@
 
                                                         <tr>
                                                             <th scope="row">نسبة الضريبة</th>
-                                                            <td>{{ $invoices->rate_VAT }}</td>
+                                                            <td>{{ $invoices->rate_vat }}</td>
                                                             <th scope="row">قيمة الضريبة</th>
-                                                            <td>{{ $invoices->value_VAT }}</td>
+                                                            <td>{{ $invoices->value_vat }}</td>
                                                             <th scope="row">الاجمالي مع الضريبة</th>
                                                             <td>{{ $invoices->total }}</td>
                                                             <th scope="row">الحالة الحالية</th>
@@ -157,20 +157,20 @@
                                                                 <td>{{ $x->invoice_number }}</td>
                                                                 <td>{{ $x->product }}</td>
                                                                 <td>{{ $invoices->productionToSectionsRealtions->section_name}}</td>
-                                                                @if ($x->value_Status == 1)
+                                                                @if ($x->value_Status == 0)
                                                                     <td><span
                                                                             class="badge badge-pill badge-success">{{ $x->status }}</span>
                                                                     </td>
-                                                                @elseif($x->value_Status ==2)
-                                                                    <td><span
-                                                                            class="badge badge-pill badge-danger">{{ $x->status }}</span>
-                                                                    </td>
-                                                                @else
+                                                                @elseif($x->value_Status ==1)
                                                                     <td><span
                                                                             class="badge badge-pill badge-warning">{{ $x->status }}</span>
                                                                     </td>
+                                                                @else
+                                                                    <td><span
+                                                                            class="badge badge-pill badge-danger">{{ $x->status }}</span>
+                                                                    </td>
                                                                 @endif
-                                                                <td>{{ $x->Payment_Date }}</td>
+                                                                <td>{{ $x->updated_at }}</td>
                                                                 <td>{{ $x->note }}</td>
                                                                 <td>{{ $x->created_at }}</td>
                                                                 <td>{{ $x->user }}</td>
@@ -188,7 +188,7 @@
                                             <!--المرفقات-->
                                             <div class="card card-statistics">
 
-                                                
+
                                                     <div class="card-body">
                                                         <h5 class="card-title h6">اضافة مرفقات</h5>
                                                         <form method="post" action="{{ url('addMoreAttachments') }}"

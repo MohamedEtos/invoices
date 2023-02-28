@@ -21,6 +21,7 @@
 
 						</div>
 					</div>
+                </div>
 @endsection
 
 @section('content')
@@ -113,7 +114,13 @@
 														<div  class="dropdown-menu tx-13">
 															<a class="dropdown-item" href="{{url('invoicesdetails')}}/{{$invoice->id}}">تفاصيل اللفاتورة</a>
 															<a class="dropdown-item text-info" href="{{url('edit_invoices')}}/{{$invoice->id}}">تعديل الفاتورة</a>
-															{{-- <a class="dropdown-item" href="{{Route('destroy')}}/{{$invoice->id}}">حذف الفاتورة</a> --}}
+                                                            {{-- <a class="dropdown-item text-success" href="{{url('edit_invoices')}}/{{$invoice->id}}">تعديل حاله الدفع</a> --}}
+
+                                                            <button class="dropdown-item text-success"
+                                                            data-toggle="modal" data-invoices_number="{{$invoice->invoice_number}}"
+                                                            data-id_inv="{{ $invoice->id }}"
+                                                            data-target="#edit_payment">تعديل حاله الدفع</button>
+
                                                             <button class="dropdown-item text-danger"
                                                             data-toggle="modal"
                                                             data-id_inv="{{ $invoice->id }}"
@@ -174,6 +181,60 @@
 
         {{-- delete modal --}}
 
+        <!-- payment status -->
+        <div class="modal fade" id="edit_payment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">تعديل حاله الدفع</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{url('updatePayments')}}" method="post">
+                    @csrf
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="title">رقم الفاتورة</label>
+
+                            <input type="hidden" class="form-control" name="id_inv" id="id_inv" value="">
+
+                            <input type="text" disabled class="form-control" name="invoices_number" id="invoices_number">
+                        </div>
+
+
+                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">حاله الدفع</label>
+                        <select name="invoices_status" id="invoices_status" class="custom-select my-1 mr-sm-2" required>
+                                <option value="0" >مدفعوه كلياً</option>
+                                <option value="1" >مدفوعه جزئيا</option>
+                        </select>
+
+
+                        <div class="form-group">
+                            <label for="title">المبلغ المدفوع</label>
+
+                            <input type="text" class="form-control" name="payment_value" id="payment_value">
+                        </div>
+                        <div class="form-group">
+                            <label for="title">ملاحظات</label>
+                            <input type="text" class="form-control" name="note_payments" id="note_payments">
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">تعديل الحاله</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">اغلاق</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+        {{-- end payment status --}}
+
 @endsection
 @section('js')
 <!-- Internal Data tables -->
@@ -204,6 +265,17 @@
         var button = $(event.relatedTarget)
         var id_inv = button.data('id_inv')
         var modal = $(this)
+        modal.find('.modal-body #id_inv').val(id_inv);
+    })
+</script>
+
+<script>
+    $('#edit_payment').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var invoices_number = button.data('invoices_number')
+        var id_inv = button.data('id_inv')
+        var modal = $(this)
+        modal.find('.modal-body #invoices_number').val(invoices_number);
         modal.find('.modal-body #id_inv').val(id_inv);
     })
 </script>

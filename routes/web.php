@@ -40,6 +40,8 @@ Route::group([ 'middleware'=>'auth'], function(){
     Route::post('delete_file','App\Http\Controllers\InvoicesAttachmentsController@delete_file');
     Route::post('addMoreAttachments','App\Http\Controllers\InvoicesAttachmentsController@addMoreAttachments');
     Route::post('invoicesDeleted','App\Http\Controllers\InvoicesController@destroy');
+    Route::post('updatePayments','App\Http\Controllers\InvoicesController@updatePayments');
+
 
 
 });
