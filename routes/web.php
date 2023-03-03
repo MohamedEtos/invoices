@@ -41,9 +41,10 @@ Route::group([ 'middleware'=>'auth'], function(){
     Route::post('addMoreAttachments','App\Http\Controllers\InvoicesAttachmentsController@addMoreAttachments');
     Route::post('invoicesDeleted','App\Http\Controllers\InvoicesController@destroy');
     Route::post('updatePayments','App\Http\Controllers\InvoicesController@updatePayments');
-    Route::get('inoices_paid','App\Http\Controllers\InvoicesController@inoices_paid');
-    Route::get('inoices_unpaid','App\Http\Controllers\InvoicesController@inoices_unpaid');
+    Route::get('invoices_paid','App\Http\Controllers\InvoicesController@invoices_paid');
+    Route::get('invoices_unpaid','App\Http\Controllers\InvoicesController@invoices_unpaid');
     Route::get('invoices_Partially','App\Http\Controllers\InvoicesController@invoices_Partially');
+    Route::get('invoices_arch','App\Http\Controllers\InvoicesController@invoices_arch');
 
 
 

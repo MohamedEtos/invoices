@@ -29,9 +29,17 @@
 @endsection
 @section('content')
 
-@if(Session::has('success')) 
-<span id="hideMeAfter5Seconds" class=" mr-2 text-success">{{Session::get('success')}}</span>
-@endif
+    @if(Session::has('success'))
+    <input id="success" type="hidden" value="{{Session::get('success')}}">
+    <script>
+        window.onload = function not7() {
+            notif({
+                msg: $('#success').val(),
+                type: "success"
+            });
+        }
+        </script>
+    @endif
 
     <!-- row -->
     <div class="row">
@@ -54,7 +62,7 @@
 
                             <div class="col">
                                 <label>تاريخ الفاتورة</label>
-                                <input class="form-control fc-datepicker" name="invoice_Date" 
+                                <input class="form-control fc-datepicker" name="invoice_Date"
                                     type="text" value="{{ $invoices->invoice_Date }}" required>
                             </div>
 

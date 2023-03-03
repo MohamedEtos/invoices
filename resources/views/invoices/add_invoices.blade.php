@@ -29,10 +29,17 @@
 @endsection
 @section('content')
 
-@if(Session::has('success')) 
-<span id="hideMeAfter5Seconds" class=" mr-2 text-success">{{Session::get('success')}}</span>
-@endif
-
+        @if(Session::has('success'))
+        <input id="success" type="hidden" value="{{Session::get('success')}}">
+        <script>
+            window.onload = function not7() {
+                notif({
+                    msg: $('#success').val(),
+                    type: "success"
+                });
+            }
+            </script>
+        @endif
 
     <!-- row -->
     <div class="row">
@@ -148,14 +155,14 @@
                             </div>
 
 
-    
+
                             <div class="col-sm-12 col-md-4 mt-2">
                                 <label for="">المرفقات  </label>
                                 <label for="" class="text-warning"> المتاحه Jpg / Png / Pdf / Jpeg </label>
                                 <input type="file" name="pic" class="dropify" accept=".pdf,.jpg, .png, image/jpeg, image/png"
                                     data-height="107" />
                             </div>
-    
+
                             <div class="col-sm-12 col-md-4 mt-2">
                                 <button type="submit" class="btn btn-outline-primary">حفظ الفاتورة</button>
                             </div>

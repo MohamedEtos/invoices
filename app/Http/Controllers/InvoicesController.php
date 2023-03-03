@@ -237,19 +237,29 @@ class InvoicesController extends Controller
 
     public function invoices_paid(){
 
-        return view('invoices.invoices_Paid');
+       $invoices = invoices::where('value_status',2)->get();
+       $invoices_details = invoices_details::all();
+        return view('invoices.invoices_Paid',compact('invoices','invoices_details'));
 
     }
 
     public function invoices_unpaid(){
-
-        return view('invoices.invoices_unpaid');
+        $invoices = invoices::where('value_status',0)->get();
+        $invoices_details = invoices_details::all();
+        return view('invoices.invoices_unpaid',compact('invoices','invoices_details'));
 
     }
 
     public function invoices_Partially(){
+        $invoices = invoices::where('value_status',1)->get();
+        $invoices_details = invoices_details::all();
+        return view('invoices.invoices_Partially',compact('invoices','invoices_details'));
 
-        return view('invoices.invoices_Partially');
+    }
+
+    public function invoices_arch(){
+        $invoices = invoices::onlyTrashed()->get();
+        return view('invoices.invoices_Partially',compact('invoices'));
 
     }
 
