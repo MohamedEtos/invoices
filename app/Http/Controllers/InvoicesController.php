@@ -59,7 +59,7 @@ class InvoicesController extends Controller
             'value_vat'=>$request->Value_VAT,
             'total'=>$request->Total,
             'status'=>'لم يتم الدفع',
-            'value_status'=>2,
+            'value_status'=>0,
             'note'=>$request->note,
             'user'=>Auth::user()->name,
         ]);
@@ -72,7 +72,7 @@ class InvoicesController extends Controller
             'product'=>$request->product,
             'section'=>$request->Section,
             'status'=>'لم يتم الدفع',
-            'value_Status'=>2,
+            'value_Status'=>0,
             'note'=>$request->note,
             'user'=>Auth::user()->name,
         ]);
@@ -193,26 +193,45 @@ class InvoicesController extends Controller
     public function updatePayments(Request $request){
 
 
-        invoices_details::where('id',$request->id_inv)->update([
+        invoices_details::where('id',$request->id_inv)->create([
             'value_Status' => $request->invoices_status,
+            'invoice_number' =>$request->invoices_number ,
+            'id_invoice' => $request->id_inv,
+            'product' => invoices::where('id',$request->id_inv)->first()->product,
+            'section' => invoices::where('id',$request->id_inv)->first()->section,
             'note' => $request->note_payments,
+            'status' => $request->invoices_status,
+            'user' => Auth::user()->name,
         ]);
 
 
-
-        if( invoices_details::where('id',$request->id_inv)->first()->value_Status == 0){
-            invoices_details::where('id',$request->id_inv)->update([
+        if( invoices_details::latest()->first()->value_Status == 2){
+            invoices_details::latest()->first()->update([
                 'status'=>'تم الدفع'
             ]);
+
+            invoices::where('id',$request->id_inv)->update([
+                'value_status'=>2,
+                'status'=>'تم الدفع',
+            ]);
+
         }
 
-        if( invoices_details::where('id',$request->id_inv)->first()->value_Status == 1){
-            invoices_details::where('id',$request->id_inv)->update([
+        if(  invoices_details::latest()->first()->value_Status == 1){
+             invoices_details::latest()->first()->update([
                 'status'=>'تم الدفع جزئياً'
             ]);
+
+
+            invoices::where('id',$request->id_inv)->update([
+                'value_status'=>1,
+                'status'=>'تم الدفع جزئياً'
+            ]);
+
         }
 
         return redirect()->back()->with('success','تم تعديل حاله الدفع');
+
 
     }
 }

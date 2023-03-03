@@ -106,17 +106,17 @@
                                                             <td>{{ $invoices->total }}</td>
                                                             <th scope="row">الحالة الحالية</th>
 
-                                                            @if ($invoices->value_Status == 1)
+                                                            @if ($invoices->value_status == 2)
                                                                 <td><span
-                                                                        class="badge badge-pill badge-success">{{ $invoices->status }}</span>
+                                                                        class="badge badge-pill badge-success">تم الدفع</span>
                                                                 </td>
-                                                            @elseif($invoices->value_Status ==2)
+                                                            @elseif($invoices->value_status == 1)
                                                                 <td><span
-                                                                        class="badge badge-pill badge-danger">{{ $invoices->status }}</span>
+                                                                        class="badge badge-pill badge-warning">مدفوعه جزئياً</span>
                                                                 </td>
                                                             @else
                                                                 <td><span
-                                                                        class="badge badge-pill badge-warning">{{ $invoices->status }}</span>
+                                                                        class="badge badge-pill badge-danger">غير مدفوعه</span>
                                                                 </td>
                                                             @endif
                                                         </tr>
@@ -157,17 +157,17 @@
                                                                 <td>{{ $x->invoice_number }}</td>
                                                                 <td>{{ $x->product }}</td>
                                                                 <td>{{ $invoices->productionToSectionsRealtions->section_name}}</td>
-                                                                @if ($x->value_Status == 0)
+                                                                @if ($x->value_Status == 2)
                                                                     <td><span
-                                                                            class="badge badge-pill badge-success">{{ $x->status }}</span>
+                                                                            class="badge badge-pill badge-success">تم الدفع</span>
                                                                     </td>
-                                                                @elseif($x->value_Status ==1)
+                                                                @elseif($x->value_Status == 1)
                                                                     <td><span
-                                                                            class="badge badge-pill badge-warning">{{ $x->status }}</span>
+                                                                            class="badge badge-pill badge-warning">مدفوعه جزئياً</span>
                                                                     </td>
                                                                 @else
                                                                     <td><span
-                                                                            class="badge badge-pill badge-danger">{{ $x->status }}</span>
+                                                                            class="badge badge-pill badge-danger">غير مدفوعه</span>
                                                                     </td>
                                                                 @endif
                                                                 <td>{{ $x->updated_at }}</td>
