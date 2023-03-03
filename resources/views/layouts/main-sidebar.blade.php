@@ -31,8 +31,8 @@
 						<ul class="slide-menu">
 							<li><a class="slide-item" href="{{ url('/' . $page='invoices') }}">قائمة الفواتير</a></li>
 							<li><a class="slide-item" href="{{ url('/' . $page='invoices_paid') }}">الفواتير المدفوعة</a></li>
-							<li><a class="slide-item" href="{{ url('/' . $page='invoices_unpaid') }}">الفواتير المدفوعة جزئياً</a></li>
-							<li><a class="slide-item" href="{{ url('/' . $page='invoices_Partially') }}">الفواتير الغير مدفوعه</a></li>
+							<li><a class="slide-item" href="{{ url('/' . $page='invoices_Partially') }}">الفواتير المدفوعة جزئياً</a></li>
+							<li><a class="slide-item" href="{{ url('/' . $page='invoices_unpaid') }}">الفواتير الغير مدفوعه</a></li>
 							<li><a class="slide-item" href="{{ url('/' . $page='invoices_arch') }}">أرشيف الفواتير</a></li>
 						</ul>
 					</li>

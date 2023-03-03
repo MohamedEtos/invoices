@@ -234,4 +234,25 @@ class InvoicesController extends Controller
 
 
     }
+
+    public function invoices_paid(){
+
+        return view('invoices.invoices_Paid');
+
+    }
+
+    public function invoices_unpaid(){
+
+        return view('invoices.invoices_unpaid');
+
+    }
+
+    public function invoices_Partially(){
+
+        return view('invoices.invoices_Partially');
+
+    }
+
+
+
 }
